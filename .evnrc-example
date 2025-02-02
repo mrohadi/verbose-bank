@@ -1,0 +1,1 @@
+export GREENLIGHT_DB_DSN=postgres://greenlight:P@ss0wrd@localhost/greenlight?sslmode=disable
