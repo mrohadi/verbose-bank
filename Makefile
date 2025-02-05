@@ -35,7 +35,7 @@ migrate/down:
 
 ## sqlc: generate sqlc file
 sqlc:
-	sqlc generate
+	@sqlc generate
 
 #==================================================================================== #
 # QUALITY CONTROL
