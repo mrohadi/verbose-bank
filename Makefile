@@ -44,5 +44,9 @@ sqlc:
 ## test: running unit test
 test:
 	go test -v -cover ./...
+	
+## test/profile: running unit test with generate cover profile
+test/profile:
+	go test -coverprofile=/tmp/profile.out -v -cover ./...
 
 .PHONY: postgres create/db drop/db migrate/up migrate/down test
