@@ -48,5 +48,9 @@ test:
 ## test/profile: running unit test with generate cover profile
 test/profile:
 	go test -coverprofile=/tmp/profile.out -v -cover ./...
+	
+## test/profile/show: show generated cover profile on web based
+test/profile/show:
+	go tool cover -html=/tmp/profile.out
 
-.PHONY: postgres create/db drop/db migrate/up migrate/down test
+.PHONY: postgres create/db drop/db migrate/up migrate/down test test/profile
