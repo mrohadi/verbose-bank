@@ -19,7 +19,7 @@ jobs:
         image: postgres:12-alpine
         env:
           POSTGRES_USER: root
-          POSTGRES_PASSWORD: P@ss0wrd
+          POSTGRES_PASSWORD: P@ssw0rd
           POSTGRES_DB: simple_bank
         ports:
           - 5432:5432
