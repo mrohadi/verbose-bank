@@ -37,6 +37,10 @@ migrate/down:
 sqlc:
 	@sqlc generate
 
+## server/run: run the development server
+server/run:
+	go run main.go
+
 #==================================================================================== #
 # QUALITY CONTROL
 #==================================================================================== #
@@ -53,4 +57,4 @@ test/profile:
 test/profile/show:
 	go tool cover -html=/tmp/profile.out
 
-.PHONY: postgres create/db drop/db migrate/up migrate/down test test/profile
+.PHONY: postgres create/db drop/db migrate/up migrate/down test test/profile server/run
