@@ -45,16 +45,26 @@ server/run:
 # QUALITY CONTROL
 #==================================================================================== #
 
-## test: running unit test
+FOLDER=cmd/api
+
+## test: running specific unit test
 test:
+	go test -v -cover -run ^$(FUNC)$$ github.com/mrohadi/simplebank/$(FOLDER)
+
+## test/all: running all unit test
+test/all:
 	go test -v -cover ./...
 	
-## test/profile: running unit test with generate cover profile
-test/profile:
+## test/all/profile: running all unit test with generate cover profile
+test/all/profile:
 	go test -coverprofile=/tmp/profile.out -v -cover ./...
 	
 ## test/profile/show: show generated cover profile on web based
 test/profile/show:
 	go tool cover -html=/tmp/profile.out
 
-.PHONY: postgres create/db drop/db migrate/up migrate/down test test/profile server/run
+## mock/gen: generate mock database code using mockgen tool
+mock/gen:
+	mockgen -package mockdb -destination db/mock/store.go github.com/mrohadi/simplebank/db/sqlc Store
+
+.PHONY: postgres create/db drop/db migrate/up migrate/down test/all test/all/profile server/run mock/gen
