@@ -198,7 +198,7 @@ func TestCreateAccount(t *testing.T) {
 			server := NewServer(store)
 			recorder := httptest.NewRecorder()
 
-			url := fmt.Sprintf("/accounts")
+			url := "/accounts"
 
 			body, err := json.Marshal(tc.param)
 			require.NoError(t, err)
