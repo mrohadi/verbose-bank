@@ -215,9 +215,10 @@ func TestCreateAccount(t *testing.T) {
 }
 
 func TestListAccount(t *testing.T) {
-	var listAccount []db.Account
-	for i := 0; i < 5; i++ {
-		listAccount = append(listAccount, randomAccount())
+	n := 5
+	accounts := make([]db.Account, n)
+	for i := 0; i < n; i++ {
+		accounts[i] = randomAccount()
 	}
 
 	queryParam := listAccountRequest{PageID: 1, PageSize: 5}
@@ -263,7 +264,7 @@ func TestListAccount(t *testing.T) {
 				store.EXPECT().
 					ListAccounts(gomock.Any(), gomock.Eq(arg)).
 					Times(1).
-					Return(listAccount, nil)
+					Return(accounts, nil)
 			},
 			checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusOK, recorder.Code)
