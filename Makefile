@@ -25,13 +25,30 @@ create/db:
 drop/db:
 	docker exec -it postgres12 dropdb simple_bank
 
+MIGRATE_VERSION=""
+RESULT=""
+ifneq ($(MIGRATE_VERSION),)
+	RESULT := $(MIGRATE_VERSION)
+endif
 ## migrate/up: apply database migration up
+## 			MIGRATE_VERSION - parameter migrate version
 migrate/up:
 	migrate -path db/migration -database "postgresql://root:P@ssw0rd@localhost:5432/simple_bank?sslmode=disable" -verbose up
 
 ## migrate/down: apply database migration down
+## 			MIGRATE_VERSION - parameter migrate version
 migrate/down:
 	migrate -path db/migration -database "postgresql://root:P@ssw0rd@localhost:5432/simple_bank?sslmode=disable" -verbose down
+	
+## migrate/up/version: apply database migration up
+## 			MIGRATE_VERSION - parameter migrate version
+migrate/up/version:
+	migrate -path db/migration -database "postgresql://root:P@ssw0rd@localhost:5432/simple_bank?sslmode=disable" -verbose up $(MIGRATE_VERSION)
+
+## migrate/down/version: apply database migration down
+## 			MIGRATE_VERSION - parameter migrate version
+migrate/down/version:
+	migrate -path db/migration -database "postgresql://root:P@ssw0rd@localhost:5432/simple_bank?sslmode=disable" -verbose down $(MIGRATE_VERSION)
 
 ## sqlc: generate sqlc file
 sqlc:
