@@ -5,7 +5,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/golang-jwt/jwt/v5"
 	"github.com/mrohadi/simplebank/utils"
 	"github.com/stretchr/testify/require"
 )
