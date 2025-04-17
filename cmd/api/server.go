@@ -48,20 +48,22 @@ func (s *Server) setupRouter() {
 	router.POST("/users", s.createUser)
 	router.POST("/users/login", s.loginUser)
 
+	authRoutes := router.Group("/").Use(authMiddleware(s.tokenMaker))
+
 	// accounts routing
-	router.POST("/accounts", s.createAccount)
-	router.GET("/accounts/:id", s.getAccount)
-	router.GET("/accounts", s.listAccount)
+	authRoutes.POST("/accounts", s.createAccount)
+	authRoutes.GET("/accounts/:id", s.getAccount)
+	authRoutes.GET("/accounts", s.listAccount)
 
 	// transfer routing
-	router.POST("/transfers", s.createTransfer)
+	authRoutes.POST("/transfers", s.createTransfer)
 
 	s.router = router
 }
 
 // Start runs the HTTP server on a specific address.
 func (s *Server) Start(addr string) error {
-	return s.router.Run()
+	return s.router.Run(addr)
 }
 
 func errorResponse(err error) gin.H {
