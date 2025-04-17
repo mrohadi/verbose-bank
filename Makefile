@@ -15,7 +15,7 @@ help:
 
 ## postgres: run docker container containing postgres image
 postgres:
-	docker run --name postgres12 -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=P@ss0wrd -d postgres:12-alpine
+	docker run --name postgres12 --network bank-network -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=P@ss0wrd -d postgres:12-alpine
 
 ## create/db: create database on postgres container
 create/db:
